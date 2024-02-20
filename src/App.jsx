@@ -1,17 +1,13 @@
-import Button from '@mui/material/Button'
-import HomeIcon from '@mui/icons-material/Home'
-import { pink } from '@mui/material/colors'
-import Typography from '@mui/material/Typography'
-import { useColorScheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
+import Container from '@mui/material/Container'
+import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import LightModeIcon from '@mui/icons-material/LightMode'
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
-import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
-import { Box } from '@mui/material'
+import { useColorScheme } from '@mui/material/styles'
+import Box from '@mui/material/Box'
 
 function ModeSelect() {
   const { mode, setMode } = useColorScheme()
@@ -51,40 +47,38 @@ function ModeSelect() {
   )
 }
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme()
-  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  // const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)')
-  // console.log('prefersDarkMode: ', prefersDarkMode)
-  // console.log('prefersLightMode: ', prefersLightMode)
-
-  return (
-    <Button
-      onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light')
-      }}
-    >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
-    </Button>
-  )
-}
-
 function App() {
 
   return (
-    <>
-      <ModeSelect />
-      <hr/>
-      <ModeToggle />
-      <hr />
-      <div>Web 1 Web</div>
-      <Typography variant='body2' color='text.secondary'>Test Typography</Typography>
-      <Button variant='contained'>Hello World</Button> <br/>
-      <Button variant='outlined'>Xin Chao</Button>  <br />
-      <Button variant='text'>Chao Xin</Button>  <br />
-      <HomeIcon sx={{ color: pink [500] }}/>
-
-    </>
+    <Container sx = {{ height: '100vh' }}>
+      <Box sx={{
+        backgroundColor: 'primary.light',
+        width: '100%',
+        height: (theme) => theme.trello.appBarHeight,
+        display: 'flex',
+        alignItems: 'center'
+      }}>
+        <ModeSelect />
+      </Box>
+      <Box sx={{
+        backgroundColor: 'primary.dark',
+        width: '100%',
+        height: (theme) => theme.trello.boardBarHeight,
+        display: 'flex',
+        alignItems: 'center'
+      }}>
+        Board Bar
+      </Box>
+      <Box sx= {{
+        backgroundColor: 'primary.main',
+        width: '100%',
+        height:(theme) => `calc(100vh - ${theme.trello.boardBarHeight} - ${theme.trello.appBarHeight})`,
+        display: 'flex',
+        alignItems: 'center'
+      }}>
+        Board Content
+      </Box>
+    </Container>
   )
 }
 
