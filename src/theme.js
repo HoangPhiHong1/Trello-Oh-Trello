@@ -20,8 +20,24 @@ const theme = extendTheme({
         secondary: orange
       }
     }
+  },
+  components: {
+    MuiButton:{
+      styleOverrides:{
+        root:{
+          textTransform: 'none'
+        }
+      }
+    },
+    MuiOutlinedInput:{
+      styleOverrides:{
+        root:({ theme }) => ({
+          color: theme.palette.primary.main,
+          fontSize: '0.875rem'
+        })
+      }
+    }
   }
-  // ...other properties
 })
 
 export default theme
