@@ -24,6 +24,14 @@ const theme = extendTheme({
   components: {
     MuiButton:{
       styleOverrides:{
+        root: ({ theme }) => ({
+          color: theme.palette.primary.main,
+          fontSize: '0.875rem'
+        })
+      }
+    },
+    MuiInputLabel:{
+      styleOverrides:{
         root:{
           textTransform: 'none'
         }
@@ -33,7 +41,18 @@ const theme = extendTheme({
       styleOverrides:{
         root:({ theme }) => ({
           color: theme.palette.primary.main,
-          fontSize: '0.875rem'
+          fontSize: '0.875rem',
+          '.MuiOutlinedInput-notchedOutline':{
+            borderColor: theme.palette.primary.light
+          },
+          '&:hover':{
+            '.MuiOutlinedInput-notchedOutline':{
+              borderColor: theme.palette.primary.main
+            }
+          },
+          '& fieldset':{
+            borderWidth: '1px !important'
+          }
         })
       }
     }
