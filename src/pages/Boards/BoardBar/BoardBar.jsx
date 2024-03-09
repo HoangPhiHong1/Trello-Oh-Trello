@@ -26,7 +26,7 @@ const MENU_STYLES = {
   }
 }
 
-function BoardBar() {
+function BoardBar({ board }) {
   return (
     <Box sx={{
       width: '100%',
@@ -43,7 +43,7 @@ function BoardBar() {
         <Chip
           sx={ MENU_STYLES }
           icon={<DashboardIcon />}
-          label="Team Alpha"
+          label={board?.title}
           clickable
         />
         <Chip
