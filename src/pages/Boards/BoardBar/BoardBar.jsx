@@ -11,6 +11,8 @@ import Tooltip from '@mui/material/Tooltip'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { NoEncryption } from '@mui/icons-material'
+import { capitalizeFirstLetter } from '~/utils/formatters.js'
+
 
 const MENU_STYLES = {
   color:'white',
@@ -49,7 +51,7 @@ function BoardBar({ board }) {
         <Chip
           sx={ MENU_STYLES }
           icon={<VpnLockIcon />}
-          label="Public/Private Workspace"
+          label={capitalizeFirstLetter(board?.type)}
           clickable
         />
         <Chip
