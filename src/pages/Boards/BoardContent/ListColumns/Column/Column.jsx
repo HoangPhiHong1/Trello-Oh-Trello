@@ -29,7 +29,7 @@ import ListCards from './ListCards/ListCards'
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '56px'
 
-function Column() {
+function Column({ column }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => { setAnchorEl(event.currentTarget) }
@@ -57,7 +57,7 @@ function Column() {
           fontSize: '1rem',
           fontWeight: 'bold',
           cursor: 'pointer'
-        }}>Column Title</Typography>
+        }}>{column?.title}</Typography>
         <Box>
           <Tooltip title='More options'>
             <ExpandMoreIcon
@@ -117,7 +117,7 @@ function Column() {
       </Box>
 
       {/* Box List Card */}
-      <ListCards/>
+      <ListCards cards = {column?.cards} />
 
       {/* Box Column Footer */}
       <Box sx={{
