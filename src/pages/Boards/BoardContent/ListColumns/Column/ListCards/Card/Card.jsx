@@ -9,6 +9,11 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
 function TrelloCard({ card }) {
+
+  const shouldShowCardActions = () => {
+    return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
+  }
+
   return (
     <Card sx={{
       cursor: 'pointer',
@@ -19,17 +24,20 @@ function TrelloCard({ card }) {
       <CardContent sx={{ p: 1.5, '&:last-child': { p:1.5 } }} >
         <Typography>{card?.title}</Typography>
       </CardContent>
-      <CardActions sx={{ p: '0 4px 8px 4px' }} >
-        {!!card?.memberIds?.length &&
+      {shouldShowCardActions() &&
+        <CardActions sx={{ p: '0 4px 8px 4px' }} >
+          {!!card?.memberIds?.length &&
          <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
-        }
-        {!!card?.comments?.length &&
+          }
+          {!!card?.comments?.length &&
          <Button size="small" startIcon={<ModeCommentIcon />}>{card?.comments?.length}</Button>
-        }
-        {!!card?.attachments?.length &&
+          }
+          {!!card?.attachments?.length &&
          <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments?.length}</Button>
-        }
-      </CardActions>
+          }
+        </CardActions>
+      }
+
     </Card>
   )
 }
