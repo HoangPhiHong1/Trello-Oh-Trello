@@ -2,10 +2,16 @@ import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utils/sorts'
 import { useState, useEffect } from 'react'
-import { DndContext } from '@dnd-kit/core'
+import { DndContext, PointerSensor, useSensor, useSensors, MouseSensor, TouchSensor } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 
 function BoardContent({ board }) {
+  const pointerSensor = useSensor(PointerSensor, { activationConstraint:{ distance: 10 } })
+  const mouseSensor = useSensor(MouseSensor, { activationConstraint:{ distance: 10 } })
+  const touchSensor = useSensor(TouchSensor, { activationConstraint:{ delay: 250, tolerance: 500 } })
+
+  const mySensors = useSensors(pointerSensor)
+
   const [orderedColumns, setOrderedColumns] = useState([])
 
   useEffect(() => {
@@ -15,6 +21,8 @@ function BoardContent({ board }) {
   const handleDragEnd = (event) => {
     console.log('handleDragEnd: ', event)
     const { active, over } = event
+
+    if (!over) return
 
     if (active.id !== over.id) {
       const oldIndex = orderedColumns.findIndex(c => c._id === active.id)
@@ -28,7 +36,7 @@ function BoardContent({ board }) {
   }
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd} sensors={mySensors}>
       <Box sx= {{
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
         width: '100%',
