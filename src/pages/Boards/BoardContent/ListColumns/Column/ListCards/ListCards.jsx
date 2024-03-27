@@ -19,9 +19,6 @@ function ListCards({ cards }) {
     }}>
 
       {cards?.map( card => <TrelloCard key = {card._id} card={card} />)}
-
-      <TrelloCard/>
-      <TrelloCard temporaryHideMedia />
     </Box>
   )
 }

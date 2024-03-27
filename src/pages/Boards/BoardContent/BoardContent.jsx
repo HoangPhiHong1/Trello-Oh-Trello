@@ -10,7 +10,7 @@ function BoardContent({ board }) {
       height:(theme) => theme.trello.boardContentHeight,
       p: '10px 0'
     }}>
-      <ListColumns columns = {board.columns} />
+      <ListColumns columns = {board?.columns} />
 
     </Box>
   )
