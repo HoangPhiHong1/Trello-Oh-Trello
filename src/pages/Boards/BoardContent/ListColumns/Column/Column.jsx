@@ -36,6 +36,7 @@ function Column({ column }) {
   })
 
   const dndKitColumnStyle = {
+    touchAction: 'none',
     transform: CSS.Translate.toString(transform),
     transition
   }
