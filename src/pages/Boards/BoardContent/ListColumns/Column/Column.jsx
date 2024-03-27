@@ -17,16 +17,15 @@ import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import React from 'react'
 import ListCards from './ListCards/ListCards'
-
-
-const COLUMN_HEADER_HEIGHT = '50px'
-const COLUMN_FOOTER_HEIGHT = '56px'
+import { mapOrder } from '~/utils/sorts'
 
 function Column({ column }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => { setAnchorEl(event.currentTarget) }
   const handleClose = () => { setAnchorEl(null) }
+
+  const orderCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
 
   return (
     <Box sx={{
@@ -110,7 +109,7 @@ function Column({ column }) {
       </Box>
 
       {/* Box List Card */}
-      <ListCards cards = {column?.cards} />
+      <ListCards cards = {orderCards} />
 
       {/* Box Column Footer */}
       <Box sx={{
